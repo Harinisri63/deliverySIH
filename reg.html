@@ -1,0 +1,389 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fdf8e4;
+    }
+    .dashboard {
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+            width: 80px;
+            background-color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            color: #fff;
+        }
+        .sidebar a {
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+            margin: 20px 0;
+        }
+    .menu-item {
+      font-size: 1.5rem;
+      color: #fff;
+      cursor: pointer;
+    }
+    .menu-item.active {
+      background-color: #ffc107;
+      color: #000;
+      padding: 0.5rem;
+      border-radius: 50%;
+    }
+    .main-content {
+      flex: 1;
+      margin-left: 60px;
+      padding: 1rem;
+    }
+    .top-cards {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      flex: 1;
+      background-color: #ececec;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .card h3 {
+      margin: 0;
+      color: #333;
+    }
+    .card .highlight {
+      font-size: 1.5rem;
+      color: #000;
+    }
+    .card .unit {
+      font-size: 0.8rem;
+    }
+    .details {
+      display: flex;
+      gap: 2rem;
+    }
+    .stats {
+      flex: 1;
+      background-color: #f7e8b5;
+      border-radius: 10px;
+      padding: 1rem;
+      color: #333;
+    }
+    .stats p {
+      margin: 0.5rem 0;
+    }
+    .graph {
+      flex: 2;
+      background-color: #fff5d7;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    a{
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="sidebar">
+      <a href="home.html">🏠</a>
+      <a href="reg.html">❤</a>
+      <a href="dashboard.html">🧭</a>
+      <a href="file.html">🚚</a>
+  </div>
+    <div class="main-content">
+      <div class="top-cards">
+        <div class="card">
+          <h3>Sleep</h3>
+          <p class="highlight">07h 30m</p>
+        </div>
+        <div class="card">
+          <h3>Heart Rate</h3>
+          <p class="highlight">74 <span class="unit">bpm</span></p>
+        </div>
+        <div class="card">
+          <h3>SpO2</h3>
+          <p class="highlight">98%</p>
+        </div>
+      </div>
+      <div class="details">
+        <div class="stats">
+          <p>👟 Footsteps: <strong>1,333</strong></p>
+          <p>😌 Stress: <strong>56 (Normal)</strong></p>
+          <p>🫁 Breathing: <strong>99 (Good)</strong></p>
+          <p>🚶 Distance Walked: <strong>2 km</strong></p>
+          <p>🛌 Sleep Quality: <strong>Good</strong></p>
+        </div>
+        <div class="graph">
+          <h3>Heart Rate</h3>
+          <canvas id="heartRateChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const ctx = document.getElementById('heartRateChart').getContext('2d');
+    const data = {
+      labels: ['6am', '9am', '12pm', '3pm', '6pm', '9pm'],
+      datasets: [{
+        label: 'Heart Rate',
+        data: [70, 80, 75, 90, 85, 78],
+        borderColor: '#ff0000',
+        fill: false,
+        tension: 0.4,
+      }],
+    };
+    const config = {
+      type: 'line',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Hours',
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'BPM',
+            },
+            min: 60,
+            max: 100,
+          },
+        },
+      },
+    };
+    new Chart(ctx, config);
+  </script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fdfbf0;
+      display: flex;
+      min-height: 100vh;
+    }
+    .dashboard {
+      display: flex;
+      flex: 1;
+    }
+    .sidebar {
+      width: 80px;
+      background-color: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      color: #fff;
+    }
+    .sidebar a {
+      color: #fff;
+      font-size: 24px;
+      text-decoration: none;
+      margin: 20px 0;
+    }
+    .main-content {
+      flex: 1;
+      padding: 1rem;
+    }
+    .top-cards {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      flex: 1;
+      background-color: #C3B649;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .card h3 {
+      margin: 0;
+      color: #333;
+    }
+    .card .highlight {
+      font-size: 1.5rem;
+      color: #000;
+    }
+    .card .unit {
+      font-size: 0.8rem;
+    }
+    .details {
+      display: flex;
+      gap: 2rem;
+    }
+    
+
+    .stats {
+      flex: 1;
+      background-color: #EDE4B5;
+      border-radius: 20px;
+      padding: 1rem;
+      color: #333;
+    }
+    .stats p {
+      margin: 0.5rem 0;
+    }
+    .graph {
+      flex: 2;
+      background-color: #fff5d7;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    #heartRateChart {
+      width: 100%;
+      height: auto;
+    }
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="sidebar">
+      <a href="home.html"><img src="home (1).png"></a>
+        <a href="reg.html"><img src="heart.jpg"></a>
+        <a href="dashboard.html"><img src="Dashboard.jpg"></a>
+        <a href="file.html" title="Files"><img src="delivery status (1).jpg"></a>
+    </div>
+    <div class="main-content">
+      <!-- Top Cards Section -->
+      <div class="top-cards">
+        <div class="card">
+          <h3>Sleep</h3>
+          <p class="highlight">07h 30m</p>
+        </div>
+        <div class="card">
+          <h3>Heart Rate</h3>
+          <p class="highlight">74 <span class="unit">bpm</span></p>
+        </div>
+        <div class="card">
+          <h3>SpO2</h3>
+          <p class="highlight">98%</p>
+        </div>
+        <div class="card">
+          <h3>Temperature</h3>
+          <p class="highlight">34°C</p>
+        </div>
+      </div>
+      <!-- Details Section -->
+      <div class="details">
+        <div class="stats">
+          <div class="details">
+            <div class="stats">
+              <p>
+                <img src="footsteps-removebg-preview.png" alt="Footsteps Icon" height="50" width="50">
+                Footsteps: <strong>1,333</strong>
+              </p>
+              <p>
+                <img src="stress-removebg-preview.png" alt="Stress Icon" height="50" width="50">
+                Stress: <strong>56 (Normal)</strong>
+              </p>
+              <p>
+                <img src="breath-removebg-preview.png" alt="Breathing Icon" height="50" width="50">
+                Breathing: <strong>99 (Good)</strong>
+              </p>
+              <p>
+                <img src="walk-removebg-preview (1).png" alt="Distance Walked Icon" height="50" width="50">
+                Distance Walked: <strong>2 km</strong>
+              </p>
+              <p>
+                <img src="sleep quality-removebg-preview (1) (1).png" alt="Sleep Quality Icon" height="50" width="50">
+                Sleep Quality: <strong>Good</strong>
+              </p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="graph">
+          <h3>Heart Rate</h3>
+          <canvas id="heartRateChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Chart.js configuration for heart rate chart
+    const ctx = document.getElementById('heartRateChart').getContext('2d');
+    const data = {
+      labels: ['6am', '9am', '12pm', '3pm', '6pm', '9pm'],
+      datasets: [{
+        label: 'Heart Rate',
+        data: [70, 80, 75, 90, 85, 78],
+        borderColor: '#ff0000',
+        fill: false,
+        tension: 0.4,
+      }],
+    };
+    const config = {
+      type: 'line',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Hours',
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'BPM',
+            },
+            min: 60,
+            max: 100,
+          },
+        },
+      },
+    };
+    new Chart(ctx, config);
+  </script>
+</body>
+</html>

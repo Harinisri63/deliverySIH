@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F2EED0;
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            background-color: #1a1a1a;
+            padding: 20px 0;
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            height: 100vh; 
+            position: fixed;
+        }
+        .sidebar a {
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .sidebar a:hover {
+            color: #ffa500;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #fdfbf0;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-left: 100px;
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto; 
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        .header .stats {
+            display: flex;
+            gap: 20px;
+        }
+        .header .stats div {
+            padding: 15px;
+            background-color: #C3B649;
+            border-radius: 10px;
+            text-align: center;
+            width: 150px;
+        }
+        .charts-container {
+            display: flex;
+            gap: 20px;
+        }
+        .chart-box {
+            flex: 1;
+            background-color: #Fdfbf0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .chart-box canvas {
+            width: 100%;
+            height: 300px;
+        }
+        .footer {
+            margin-top: 40px;
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer .place-info {
+            font-size: 14px;
+        }
+        .footer .place-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .footer .place-info table td,
+        .footer .place-info table th {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .footer .place-info table th {
+            background-color: #f2f2f2;
+        }
+        .footer .place-info i {
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="home.html"><img src="home (1).png"></a>
+        <a href="reg.html"><img src="heart.jpg"></a>
+        <a href="dashboard.html"><img src="Dashboard.jpg"></a>
+        <a href="file.html" title="Files"><img src="delivery status (1).jpg"></a>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div>Dashboard</div>
+            <div class="stats">
+                <div>
+                    <h4>Total Users</h4>
+                    <p>27,345</p>
+                </div>
+                <div>
+                    <h4>New Users</h4>
+                    <p>6,935</p>
+                </div>
+                <div>
+                    <h4>Active Users</h4>
+                    <p>19,563</p>
+                </div>
+                <div>
+                    <h4>Inactive Users</h4>
+                    <p>7,782</p>
+                </div>
+            </div>
+        </div>
+        <div class="charts-container">
+            <div class="chart-box">
+                <h4>Monthly Deliveries</h4>
+                <canvas id="monthly-deliveries"></canvas>
+            </div>
+            <div class="chart-box">
+                <h4>Peak Delivery Hours</h4>
+                <canvas id="peak-delivery-hours"></canvas>
+            </div>
+        </div>
+        <div class="charts-container">
+            <div class="chart-box">
+                <h4>Weekly Deliveries</h4>
+                <canvas id="weekly-deliveries"></canvas>
+            </div>
+            <div class="chart-box">
+                <h4>Peak Delivery by Place</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Place</th>
+                            <th>Peak Target (Monthly)</th>
+                            <th>Users</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Chennai</td>
+                            <td>156,150</td>
+                            <td>30%</td>
+                        </tr>
+                        <tr>
+                            <td>Coimbatore</td>
+                            <td>114,560</td>
+                            <td>30%</td>
+                        </tr>
+                        <tr>
+                            <td>Madurai</td>
+                            <td>105,430</td>
+                            <td>30%</td>
+                        </tr>
+                        <tr>
+                            <td>Salem</td>
+                            <td>94,560</td>
+                            <td>30%</td>
+                        </tr>
+                        <tr>
+                            <td>Trichy</td>
+                            <td>87,940</td>
+                            <td>30%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        var ctx1 = document.getElementById('monthly-deliveries').getContext('2d');
+        var monthlyDeliveriesChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                datasets: [{
+                    label: 'Deliveries',
+                    data: [500, 600, 550, 650, 700, 600, 750, 800, 850, 900],
+                    backgroundColor: ['#ff6b6b', '#ff8e72', '#ffd56b', '#4a90e2', '#76c7c0', '#98a4e8', '#ffca7f', '#ff7171', '#7acff7', '#69db87'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        var ctxWeekly = document.getElementById('weekly-deliveries').getContext('2d');
+        var weeklyDeliveriesChart = new Chart(ctxWeekly, {
+            type: 'bar', 
+            data: {
+                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                datasets: [{
+                    label: 'Deliveries',
+                    data: [100, 150, 130, 170, 200, 250, 180], 
+                    backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#8AE234'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        var ctx2 = document.getElementById('peak-delivery-hours').getContext('2d');
+        var peakDeliveryHoursChart = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: ['12:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00'],
+                datasets: [{
+                    label: 'Peak Delivery Hours',
+                    data: [3, 2, 1, 5, 4, 3, 6, 7],
+                    borderColor: '#FF5733',
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

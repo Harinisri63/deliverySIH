@@ -1,0 +1,280 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Information</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #f6d365, #fda085);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #ffffff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      color: #f76c6c;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 15px;
+      color: #444;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    button {
+      background: #f76c6c;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #ff5b5b;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0 0 0;
+      max-height: 200px;
+      overflow-y: auto;
+      text-align: left;
+    }
+    li {
+      background: #f7f7f7;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Health Information Form</h1>
+    <form id="healthForm">
+      <label for="user">Username:</label>
+      <input type="text" id="user" name="user" placeholder="Enter your name" required>
+      <label for="height">Height (cm):</label>
+      <input type="number" id="height" name="height" placeholder="Enter your height" required>
+      <label for="weight">Weight (kg):</label>
+      <input type="number" id="weight" name="weight" placeholder="Enter your weight" required>
+      <button type="submit">Submit</button>
+    </form>
+    <h2>Stored Health Data</h2>
+    <ul id="healthData"></ul>
+  </div>
+  <script>
+    document.getElementById("healthForm").addEventListener("submit", async function (e) {
+      e.preventDefault(); 
+      const user = document.getElementById("user").value;
+      const height = document.getElementById("height").value;
+      const weight = document.getElementById("weight").value;
+      const healthData = { user, height: parseInt(height), weight: parseInt(weight) };
+      try {
+        const response = await fetch("http://localhost:3005/addHealth", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(healthData),
+        });
+        if (response.ok) {
+          alert("Health data added successfully!");
+          fetchHealthData(); 
+        } else {
+          const error = await response.json();
+          alert("Error: " + error.message);
+        }
+      } catch (err) {
+        console.error("Error:", err);
+        alert("An error occurred. Please try again.");
+      }
+    });
+    async function fetchHealthData() {
+      try {
+        const response = await fetch("http://localhost:3005/getHealth");
+        const healthData = await response.json();
+        const healthDataList = document.getElementById("healthData");
+        healthDataList.innerHTML = "";
+        healthData.forEach((entry) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `${entry.user}: Height - ${entry.height} cm, Weight - ${entry.weight} kg`;
+          healthDataList.appendChild(listItem);
+        });
+      } catch (err) {
+        console.error("Error fetching health data:", err);
+      }
+    }
+    fetchHealthData();
+  </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Information</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #f6d365, #fda085);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #ffffff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      color: #f76c6c;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 15px;
+      color: #444;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    button {
+      background: #f76c6c;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #ff5b5b;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0 0 0;
+      max-height: 200px;
+      overflow-y: auto;
+      text-align: left;
+    }
+    li {
+      background: #f7f7f7;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Health Information Form</h1>
+    <form id="healthForm">
+      <label for="user">Username:</label>
+      <input type="text" id="user" name="user" placeholder="Enter your name" required>
+      <label for="height">Height (cm):</label>
+      <input type="number" id="height" name="height" placeholder="Enter your height" required>
+      <label for="weight">Weight (kg):</label>
+      <input type="number" id="weight" name="weight" placeholder="Enter your weight" required>
+      <button type="submit">Submit</button>
+    </form>
+    <h2>Stored Health Data</h2>
+    <ul id="healthData"></ul>
+  </div>
+  <script>
+    document.getElementById("healthForm").addEventListener("submit", async function (e) {
+      e.preventDefault(); 
+      const user = document.getElementById("user").value;
+      const height = document.getElementById("height").value;
+      const weight = document.getElementById("weight").value;
+      const healthData = { user, height: parseInt(height), weight: parseInt(weight) };
+
+      try {
+        const response = await fetch("http://localhost:3005/addHealth", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(healthData),
+        });
+        if (response.ok) {
+          alert("Health data added successfully!");
+          fetchHealthData(); // Refresh the data after successful submit
+        } else {
+          const error = await response.json();
+          alert("Error: " + error.message);
+        }
+      } catch (err) {
+        console.error("Error:", err);
+        alert("An error occurred. Please try again.");
+      }
+    });
+
+    async function fetchHealthData() {
+      try {
+        const response = await fetch("http://localhost:3005/getHealth");
+        const healthData = await response.json();
+        const healthDataList = document.getElementById("healthData");
+        healthDataList.innerHTML = "";
+        healthData.forEach((entry) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `${entry.user}: Height - ${entry.height} cm, Weight - ${entry.weight} kg`;
+          healthDataList.appendChild(listItem);
+        });
+      } catch (err) {
+        console.error("Error fetching health data:", err);
+      }
+    }
+
+    // Initial fetch when the page loads
+    fetchHealthData();
+  </script>
+</body>
+</html>
